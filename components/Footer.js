@@ -46,6 +46,14 @@ export default function Footer() {
               LinkedIn: Akhil
             </a>
             <a
+              href="https://github.com/Akhil-dev9985"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link"
+            >
+              Git: Akhil-dev9985
+            </a>
+            <a
               href="https://instagram.com/_.akhil14._"
               target="_blank"
               rel="noopener noreferrer"

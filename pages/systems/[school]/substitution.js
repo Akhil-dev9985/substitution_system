@@ -1399,6 +1399,7 @@ export default function SubstitutionPage() {
                         <th>S.No</th>
                         <th>Absent Teacher</th>
                         <th>Substituted Teacher</th>
+                        <th>Period No</th>
                         <th>Period</th>
                         <th>Signature</th>
                       </tr>
@@ -1411,6 +1412,7 @@ export default function SubstitutionPage() {
                           <td className="mono">{index + 1}</td>
                           <td>{row.absent}</td>
                           <td>{row.substitute}</td>
+                          <td>{row.periodId}</td>
                           <td>{row.periodLabel}</td>
                           <td className="signature-cell">
                             <span className="signature-line" />
