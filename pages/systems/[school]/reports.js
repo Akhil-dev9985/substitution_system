@@ -7,7 +7,9 @@ import {
   query,
   where
 } from "firebase/firestore";
+import { signOut } from "firebase/auth";
 import { db } from "../../../lib/firebase";
+import { auth } from "../../../lib/firebase";
 
 const INDIA_TIMEZONE = "Asia/Kolkata";
 
@@ -145,6 +147,11 @@ export default function Reports() {
 
   const schoolName = school?.toString().toUpperCase() || "SCHOOL";
 
+  const handleLogout = async () => {
+    await signOut(auth);
+    router.push("/");
+  };
+
   return (
     <div className="page-container system-page">
       <div className="page-shell fade-in">
@@ -158,9 +165,14 @@ export default function Reports() {
               Coverage analytics for {startKey} to {endKey} (Mon–Sat).
             </p>
           </div>
-          <span className="chip">
-            <span className="status-dot" /> Weekly View
-          </span>
+          <div className="header-actions">
+            <span className="chip">
+              <span className="status-dot" /> Weekly View
+            </span>
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </header>
 
         <div className="kpi-grid">

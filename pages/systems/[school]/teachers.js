@@ -13,7 +13,7 @@ import {
   where
 } from "firebase/firestore";
 
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from "../../../lib/firebase";
 
 const ADMIN_UID = "q17KO96ZiGa3PVQVcePjKlbXLED2";
@@ -134,6 +134,11 @@ export default function Teachers() {
   const schoolName = school?.toString().toUpperCase() || "SCHOOL";
   const canAddTeacher = isAdminUser || systemReady;
 
+  const handleLogout = async () => {
+    await signOut(auth);
+    router.push("/");
+  };
+
   return (
     <div className="page-container system-page">
       <div className="page-shell fade-in">
@@ -148,9 +153,14 @@ export default function Teachers() {
               planning.
             </p>
           </div>
-          <span className="chip">
-            <span className="status-dot" /> Live Sync
-          </span>
+          <div className="header-actions">
+            <span className="chip">
+              <span className="status-dot" /> Live Sync
+            </span>
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </header>
 
         <div className="teacher-layout">

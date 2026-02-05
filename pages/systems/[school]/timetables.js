@@ -1,5 +1,7 @@
 import { useMemo } from "react";
 import { useRouter } from "next/router";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../lib/firebase";
 import { getSchoolTimetable } from "../../../data/timetables";
 import TimetableGrid from "../../../components/TimetableGrid";
 
@@ -21,6 +23,11 @@ export default function TimetablesPage() {
     timetable.classTimetable || {}
   );
 
+  const handleLogout = async () => {
+    await signOut(auth);
+    router.push("/");
+  };
+
   return (
     <div className="page-container system-page">
       <div className="page-shell fade-in">
@@ -35,9 +42,14 @@ export default function TimetablesPage() {
               files.
             </p>
           </div>
-          <span className="chip">
-            <span className="status-dot" /> Live Data
-          </span>
+          <div className="header-actions">
+            <span className="chip">
+              <span className="status-dot" /> Live Data
+            </span>
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </header>
 
         <section className="step-panel">

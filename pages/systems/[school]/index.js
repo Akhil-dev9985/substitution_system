@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../../lib/firebase";
 
 const VITALIS_UID = "3VrwMgWEDoQekvqmXZGWJ4E7AFV2";
@@ -35,6 +35,11 @@ export default function SchoolSystem() {
   if (!router.isReady) return null;
 
   const schoolName = school?.toString().toUpperCase() || "SCHOOL";
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    router.push("/");
+  };
   const modules = [
     {
       title: "Teachers",
@@ -96,6 +101,13 @@ export default function SchoolSystem() {
               onClick={() => router.push(`/systems/${school}/substitution`)}
             >
               Open Substitutions
+            </button>
+            <button
+              className="btn btn-danger"
+              type="button"
+              onClick={handleLogout}
+            >
+              Logout
             </button>
           </div>
         </section>

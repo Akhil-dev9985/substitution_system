@@ -8,7 +8,7 @@ import {
   query,
   serverTimestamp
 } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from "../../../lib/firebase";
 import { getSchoolTimetable } from "../../../data/timetables";
 import TimetableGrid from "../../../components/TimetableGrid";
@@ -1103,6 +1103,11 @@ export default function SubstitutionPage() {
     }
   };
 
+  const handleLogout = async () => {
+    await signOut(auth);
+    router.push("/");
+  };
+
   if (!router.isReady) return null;
 
   const schoolName = school?.toString().toUpperCase() || "SCHOOL";
@@ -1150,9 +1155,14 @@ export default function SubstitutionPage() {
               generate a coverage plan with highlighted timetables.
             </p>
           </div>
-          <span className="chip">
-            <span className="status-dot" /> Live Planning
-          </span>
+          <div className="header-actions">
+            <span className="chip">
+              <span className="status-dot" /> Live Planning
+            </span>
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         </header>
 
         <div className="step-tabs">
